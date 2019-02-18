@@ -1,0 +1,35 @@
+{
+  "name": "hunternnm/laravel-roadrunner",
+  "description": "Bridge for fast",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Porozhnyy",
+      "email": "hunter653@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "illuminate/console": "~5.7",
+    "illuminate/contracts": "~5.7",
+    "illuminate/http": "~5.7",
+    "illuminate/support": "~5.7",
+    "symfony/psr-http-message-bridge": "^1.1",
+    "spiral/roadrunner": "^1.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hunternnm\\LaravelRoadrunner\\RoadrunnerServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Hunternnm\\LaravelRoadrunner\\": "src"
+    }
+  }
+}
