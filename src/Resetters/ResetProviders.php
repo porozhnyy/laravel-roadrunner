@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hunternnm\LaravelRoadrunner\Resetters;
 
 use Illuminate\Contracts\Container\Container;
@@ -7,7 +9,7 @@ use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
 
 /**
  * Class ResetProviders
- * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/ResetProviders.php
+ * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/ResetProviders.php.
  */
 class ResetProviders implements ResetterContract
 {
@@ -19,7 +21,7 @@ class ResetProviders implements ResetterContract
     /**
      * "handle" function for resetting app.
      *
-     * @param Container  $app
+     * @param Container               $app
      * @param RoadrunnerLaravelBridge $sandbox
      *
      * @return Container

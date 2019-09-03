@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hunternnm\LaravelRoadrunner\Resetters;
 
 use Illuminate\Contracts\Container\Container;
@@ -8,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class RebindRouterContainer
- * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindRouterContainer.php
+ * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindRouterContainer.php.
  */
 class RebindRouterContainer implements ResetterContract
 {
@@ -25,7 +27,7 @@ class RebindRouterContainer implements ResetterContract
     /**
      * "handle" function for resetting app.
      *
-     * @param Container  $app
+     * @param Container               $app
      * @param RoadrunnerLaravelBridge $sandbox
      *
      * @return Container

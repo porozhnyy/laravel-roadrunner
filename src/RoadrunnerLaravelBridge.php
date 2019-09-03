@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * idea is taken from the package https://github.com/swooletw/laravel-swoole
  */
@@ -8,6 +11,7 @@ namespace Hunternnm\LaravelRoadrunner;
 use Exception;
 use Illuminate\Container\Container as ContainerInstance;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
@@ -51,7 +55,7 @@ class RoadrunnerLaravelBridge
     /**
      * RoadRunner constructor.
      *
-     * @param Container $baseApp
+     * @param Container   $baseApp
      * @param string|null $basePath
      *
      * @throws ReflectionException
@@ -114,7 +118,7 @@ class RoadrunnerLaravelBridge
         foreach ($resetters as $resetter) {
             $resetterClass = $app->make($resetter);
             if (!$resetterClass instanceof ResetterContract) {
-                throw new Exception("{$resetter} must implement " . ResetterContract::class);
+                throw new Exception("{$resetter} must implement ".ResetterContract::class);
             }
             $this->resetters[$resetter] = $resetterClass;
         }
@@ -141,7 +145,12 @@ class RoadrunnerLaravelBridge
         }
     }
 
-    public function resetApp(Container $app)
+    /**
+     * @param Container $app
+     *
+     * @throws BindingResolutionException
+     */
+    public function resetApp(Container $app): void
     {
         $this->config = clone $this->baseApp->make(Repository::class);
 
@@ -155,7 +164,7 @@ class RoadrunnerLaravelBridge
     /**
      * @param ContainerInstance $app
      */
-    public function setInstance(ContainerInstance $app)
+    public function setInstance(ContainerInstance $app): void
     {
         $app->instance('app', $app);
         $app->instance(ContainerInstance::class, $app);

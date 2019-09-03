@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hunternnm\LaravelRoadrunner\Resetters;
 
 use Illuminate\Contracts\Container\Container;
@@ -7,7 +9,7 @@ use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
 
 /**
  * Class RebindViewContainer
- * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindViewContainer.php
+ * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindViewContainer.php.
  */
 class RebindViewContainer implements ResetterContract
 {
@@ -24,7 +26,7 @@ class RebindViewContainer implements ResetterContract
     /**
      * "handle" function for resetting app.
      *
-     * @param Container  $app
+     * @param Container               $app
      * @param RoadrunnerLaravelBridge $sandbox
      *
      * @return Container

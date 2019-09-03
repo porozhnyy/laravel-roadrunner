@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'force_https' => env('RR_FORCE_HTTPS', true),
+
     'pre_resolved' => [
         'view',
         'files',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hunternnm\LaravelRoadrunner\Resetters;
 
 use Illuminate\Contracts\Container\Container;
@@ -8,7 +10,7 @@ use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
 
 /**
  * Class RebindKernelContainer
- * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindKernelContainer.php
+ * Original file https://github.com/swooletw/laravel-swoole/blob/master/src/Server/Resetters/RebindKernelContainer.php.
  */
 class RebindKernelContainer implements ResetterContract
 {
@@ -20,7 +22,7 @@ class RebindKernelContainer implements ResetterContract
     /**
      * "handle" function for resetting app.
      *
-     * @param Container  $app
+     * @param Container               $app
      * @param RoadrunnerLaravelBridge $sandbox
      *
      * @return Container

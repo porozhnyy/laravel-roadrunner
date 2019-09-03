@@ -1,15 +1,5 @@
-# Laravel-Roadrunner
-Simple Laravel-Roadrunner bridge 
+#!/usr/bin/env php
 
-## Install
-
-```shell
-$ composer require hunternnm/laravel-roadrunner
-```
-
-
-### Example `psr-worker.php`
-```php
 <?php
 
 use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
@@ -25,14 +15,14 @@ use Zend\Diactoros\StreamFactory;
 use Zend\Diactoros\UploadedFileFactory;
 
 ini_set('display_errors', 'stderr');
-require 'vendor/autoload.php';
+require DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor/autoload.php';
 
 $worker = new RoadRunner\Worker(new Goridge\StreamRelay(STDIN, STDOUT));
 $psr7 = new RoadRunner\PSR7Client($worker);
 $httpFoundationFactory = new HttpFoundationFactory();
 
 /** @var Application $app */
-$app = require __DIR__.'/bootstrap/app.php';
+$app = require DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'bootstrap/app.php';
 
 $rr = new RoadrunnerLaravelBridge($app, __DIR__);
 
@@ -56,5 +46,3 @@ while ($req = $psr7->acceptRequest()) {
         $psr7->getWorker()->error((string) $e);
     }
 }
-
-```
