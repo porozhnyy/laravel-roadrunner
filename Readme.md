@@ -12,11 +12,11 @@ If you need - publish the config file to change implementations (ie. resetters a
 php artisan vendor:publish --provider="Hunternnm\LaravelRoadrunner\RoadrunnerServiceProvider" --tag=config
 ```
 
-##Usage
+### Usage
 
 The package is ready for production and contains a simple psr-worker(`bin/roadrunner-worker`) to run from scratch. If you need customize worker - see [Example](#Example)
 
-### <a name="Example"></a>Example
+### <a name="Example"></a> Example
 
 Example `.rr.yaml` for run Laravel
 ```yaml
@@ -35,7 +35,7 @@ rpc:
 
 And then run roadrunner `./rr -w PATH_TO_YOUR_PROJECT`
 
-####Custom `psr-worker.php`
+#### Custom `psr-worker.php`
 ```php
 <?php
 
