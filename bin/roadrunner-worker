@@ -1,5 +1,3 @@
-#!/usr/bin/env php
-
 <?php
 
 use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
@@ -15,14 +13,14 @@ use Zend\Diactoros\StreamFactory;
 use Zend\Diactoros\UploadedFileFactory;
 
 ini_set('display_errors', 'stderr');
-require DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor/autoload.php';
+require 'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 
 $worker = new RoadRunner\Worker(new Goridge\StreamRelay(STDIN, STDOUT));
 $psr7 = new RoadRunner\PSR7Client($worker);
 $httpFoundationFactory = new HttpFoundationFactory();
 
 /** @var Application $app */
-$app = require DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'bootstrap/app.php';
+$app = require 'bootstrap'.DIRECTORY_SEPARATOR.'app.php';
 
 $rr = new RoadrunnerLaravelBridge($app, __DIR__);
 

@@ -1,5 +1,5 @@
 # Laravel-Roadrunner
-Simple Laravel-Roadrunner bridge 
+Simple Laravel-[Roadrunner](https://github.com/spiral/roadrunner) bridge 
 
 ## Install
 
@@ -7,8 +7,35 @@ Simple Laravel-Roadrunner bridge
 $ composer require hunternnm/laravel-roadrunner
 ```
 
+If you need - publish the config file to change implementations (ie. resetters and more)
+```bash
+php artisan vendor:publish --provider="Hunternnm\LaravelRoadrunner\RoadrunnerServiceProvider" --tag=config
+```
 
-### Example `psr-worker.php`
+##Usage
+
+The package is ready for production and contains a simple psr-worker(`bin/roadrunner-worker`) to run from scratch. If you need customize worker - see [Example](#Example)
+
+### <a name="Example"></a>Example
+
+Example `.rr.yaml` for run Laravel
+```yaml
+http:
+  address: 0.0.0.0:8000
+  workers:
+    command: "php vendor/bin/roadrunner-worker"
+    pool:
+      numWorkers: 16
+      destroyTimeout: 3
+      maxJobs:  0
+rpc:
+  enable: true
+  listen: tcp://:6001
+```
+
+And then run roadrunner `./rr -w PATH_TO_YOUR_PROJECT`
+
+####Custom `psr-worker.php`
 ```php
 <?php
 
