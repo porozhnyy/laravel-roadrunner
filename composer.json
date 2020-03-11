@@ -10,11 +10,11 @@
   ],
   "require": {
     "php": "^7.1",
-    "illuminate/console": "^5.6|^6",
-    "illuminate/contracts": "^5.6|^6",
-    "illuminate/http": "^5.6|^6",
-    "illuminate/routing": "^5.6|^6",
-    "illuminate/support": "^5.6|^6",
+    "illuminate/console": "^5.6|^6|^7",
+    "illuminate/contracts": "^5.6|^6|^7",
+    "illuminate/http": "^5.6|^6|^7",
+    "illuminate/routing": "^5.6|^6|^7",
+    "illuminate/support": "^5.6|^6|^7",
     "symfony/psr-http-message-bridge": "^1.2",
     "spiral/roadrunner": "^1.4"
   },
