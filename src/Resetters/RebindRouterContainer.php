@@ -42,6 +42,7 @@ class RebindRouterContainer implements ResetterContract
                 return;
             }
             try {
+                $request->enableHttpMethodParameterOverride();
                 /** @var mixed $route */
                 $route = $this->routes->match($request);
                 // clear resolved controller
