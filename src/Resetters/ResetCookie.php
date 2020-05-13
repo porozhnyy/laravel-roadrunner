@@ -26,7 +26,7 @@ class ResetCookie implements ResetterContract
         if (isset($app['cookie'])) {
             $cookies = $app->make('cookie');
             foreach ($cookies->getQueuedCookies() as $key => $value) {
-                $cookies->unqueue($key);
+                $cookies->unqueue($value->getName());
             }
         }
 
