@@ -42,5 +42,9 @@ class RoadrunnerServiceProvider extends ServiceProvider
         if (config('roadrunner.force_https')) {
             $url->forceScheme('https');
         }
+
+        if (! \function_exists('\\Symfony\\Component\\HttpFoundation\\File\\is_uploaded_file')) {
+            require __DIR__ . '/../fixes/fix-symfony-file-validation.php';
+        }
     }
 }
