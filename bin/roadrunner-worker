@@ -2,46 +2,35 @@
 <?php
 
 use Hunternnm\LaravelRoadrunner\RoadrunnerLaravelBridge;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Spiral\Goridge;
 use Spiral\RoadRunner;
+use Nyholm\Psr7;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
-use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
-use Laminas\Diactoros\ResponseFactory;
-use Laminas\Diactoros\ServerRequestFactory;
-use Laminas\Diactoros\StreamFactory;
-use Laminas\Diactoros\UploadedFileFactory;
 
 ini_set('display_errors', 'stderr');
 require 'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 
-$worker = new RoadRunner\Worker(new Goridge\StreamRelay(STDIN, STDOUT));
-$psr7 = new RoadRunner\PSR7Client($worker);
+$worker = RoadRunner\Worker::create();
+$psrFactory = new Psr7\Factory\Psr17Factory();
+
+$worker = new RoadRunner\Http\PSR7Worker($worker, $psrFactory, $psrFactory, $psrFactory);
+$app = require 'bootstrap'.DIRECTORY_SEPARATOR.'app.php';
+$rr = new RoadrunnerLaravelBridge($app, __DIR__);
 $httpFoundationFactory = new HttpFoundationFactory();
 
-/** @var Application $app */
-$app = require 'bootstrap'.DIRECTORY_SEPARATOR.'app.php';
-
-$rr = new RoadrunnerLaravelBridge($app, __DIR__);
-
-$psr7factory = new PsrHttpFactory(
-    new ServerRequestFactory(),
-    new StreamFactory(),
-    new UploadedFileFactory(),
-    new ResponseFactory()
-);
-
-while ($req = $psr7->acceptRequest()) {
+while ($req = $worker->waitRequest()) {
     try {
         $symfonyRequest = $httpFoundationFactory->createRequest($req);
         $request = Request::createFromBase($symfonyRequest);
 
         $response = $rr->request($request);
 
-        $psr7response = $psr7factory->createResponse($response);
-        $psr7->respond($psr7response);
+        $rsp = new Psr7\Response();
+        $rsp->getBody()->write($response->getContent());
+
+        $worker->respond($rsp);
+
     } catch (Throwable $e) {
-        $psr7->getWorker()->error((string) $e);
+        echo $e->getMessage();
     }
 }
